@@ -34,7 +34,7 @@ export default function SignIn() {
     const { username, password } = getValues()
 
     ApiSignIn({username, password})
-      .then(res => res.length && router.push('/churras'))
+      .then(res => res.length && router.push('/events'))
   };
   return (
     <div className="flex flex-col justify-center">

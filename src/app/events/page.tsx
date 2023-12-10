@@ -1,8 +1,8 @@
 'use client'
 
 import { churras } from "@/mocks/churras";
-import Event from "../components/Event";
-import AddEvent from "../components/AddEvent";
+import Event from "@/app/components/Event";
+import AddEvent from "@/app/components/AddEvent";
 
 export default function Dashboard() {
   return (

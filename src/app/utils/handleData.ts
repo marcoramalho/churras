@@ -1,6 +1,6 @@
 import { Guest } from "../types/common";
 
-const handleIntegerToDecimal = (value: number) =>
+export const handleIntegerToDecimal = (value: number) =>
   (Math.round(value * 100) / 100).toFixed(2).replace('.', ',')
   
 
