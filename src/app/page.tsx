@@ -1,5 +1,7 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <div>Churras</div>
+    <Link href="/auth">Churras</Link>
   )
 }
