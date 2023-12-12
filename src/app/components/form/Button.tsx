@@ -1,13 +1,11 @@
-interface ButtonProps {
-  value: string;
-  name?: string;
-  type: 'submit' | 'button' | 'reset';
-}
+import { ComponentProps } from "react"
 
-export default function Button({ value, name, type }: ButtonProps) {
+export type ButtonProps = ComponentProps<'button'>
+
+export default function Button(props: ButtonProps) {
   return (
     <div className="mt-5">
-      <button type={type} name={name} className="bg-black rounded-lg py-2 px-10 text-white w-full">{value}</button>
+      <button className="bg-black rounded-lg py-2 px-10 text-white w-full hover:bg-gray-900" {...props} />
     </div>
   )
 }

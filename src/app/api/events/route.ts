@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { AddChurras, Guest, IChurras } from '@/app/types/common'
 import { churras } from '@/mocks/churras'
 
+
 export async function POST(request: Request) {
   const data: AddChurras = await request.json()
 
@@ -15,17 +16,23 @@ export async function POST(request: Request) {
   
   if (!hasChurras) {
     churras.push(newChurras)
-    return NextResponse.json(churras)
+    return NextResponse.json({ data: churras })
   } else {
-    return NextResponse.json(hasChurras)
+    return NextResponse.json({ data: hasChurras })
   } 
 }
 
 
 export async function PUT(request: Request) {
-  const data = await request.json()
+  const data: Guest = await request.json()
 
-  // const getChurrasById = churras.find(({ id }) => data.churrasId === id)
- 
-  return NextResponse.json(data)
+  const event = churras.filter(row => row.id === Number(data?.churrasId))[0]
+  const verName = event.guest.find(row => row.name === data?.name)
+  
+  if (!verName?.name) {
+    event?.guest?.push(data)
+    return NextResponse.json({ data: event.guest })
+  } else {
+    return NextResponse.json({ data: [] })
+  }
 }

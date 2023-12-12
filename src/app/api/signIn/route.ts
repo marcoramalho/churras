@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { loginAuth } from '@/mocks/loginAuth'
+import auth from '@/mocks/dataAuth.json'
 import { SignIn } from '@/app/types/common'
 
 export async function POST(request: Request) {
@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
   const getUser = (data: SignIn) => {
     const { username: postUsername, password: postPassword } = data
-    const user = loginAuth.filter(
+    const user = auth.filter(
       ({ username, password }) =>
         username === postUsername && password === postPassword,
     )

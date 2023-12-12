@@ -3,12 +3,10 @@
 import { useRouter } from 'next/navigation'
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import { Input } from "@/app/components/form/Input"
 import Button from "@/app/components/form/Button"
 import { validationMessages } from "@/mocks/messages";
 import { SignIn as ApiSignIn } from "@/app/services/SignIn";
 import { SignIn as TypeSignIn } from "@/app/types/common";
-import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = Yup.object().shape({
@@ -65,19 +63,7 @@ export default function SignIn() {
           {errors.password && <div className='text-red-500'>{validationMessages.required}</div>}
         </div>
         {/* TODO: CORRIGIR COMPONENTE */}
-        {/* <Input
-          label="Login"
-          type="text"
-          error={formState.errors.username}
-          {...register("username")}
-        /> */}
-        {/* <Input
-          label="Senha"
-          type="password"
-          error={formState.errors.password}
-          {...register("password")}
-        /> */}
-        <Button value="Entrar" type="submit" name="login" />
+        <Button type="submit" name="login">Entrar</Button>
       </form>
     </div>
   )

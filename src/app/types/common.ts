@@ -17,6 +17,11 @@ export type IChurras = {
 
 export type Guest = {
   churrasId?: number
+  status: boolean
   name: string
-  investment: number
+  investment: number | string
+}
+
+export type Name = {
+  name: string
 }

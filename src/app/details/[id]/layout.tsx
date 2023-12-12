@@ -6,7 +6,7 @@ interface SignInLayout {
 
 export default function EventLayout({ children }: SignInLayout) {
   return (
-    <div className='bg-white w-full flex justify-center'>
+    <div className='bg-white w-full flex flex-auto justify-center'>
       <div className='w-[500px]'>{children}</div>
     </div>
   )
