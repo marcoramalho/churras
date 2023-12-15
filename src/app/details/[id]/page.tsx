@@ -21,15 +21,16 @@ interface DetailProps {
 }
 
 export default function Detail({ params }: DetailProps) {
-  const { event: eventStore } = useStore()
+  const { details } = useStore()
 
   const { id } = params
   const [newGuest, setNewGuest] = useState(false)
   const [budget, setBudget] = useState('0,00')
 
   useEffect(() => {
-    setBudget(getBudget(eventStore.guest))
-  }, [eventStore])
+    setBudget(getBudget(details?.guest))
+    console.log(details)
+  }, [details])
   return (
     <>
       <Dialog title="Adicionar Convidado" open={newGuest}>
@@ -37,22 +38,22 @@ export default function Detail({ params }: DetailProps) {
       </Dialog>
       <div className="bg-white flex flex-col mt-[-20px] p-3">
         <div className="flex justify-between">
-          <div className="text-xl font-bold">{moment(eventStore?.date).format('DD/MM')}</div>
+          <div className="text-xl font-bold">{moment(details?.date).format('DD/MM')}</div>
           <div className="text-base flex justify-start">
             <span className="mr-2"><button onClick={() => setNewGuest(true)}><FaCirclePlus size={24} color='#FED21D' /></button></span>
             <HiOutlineUsers size={18} color='#FFD836' style={{ marginRight: '5px' }} />
-            {eventStore?.guest.length}
+            {details?.guest.length}
           </div>
         </div>
         <div className="flex justify-between my-3">
-          <div className="text-2xl font-semibold">{eventStore?.title}</div>
+          <div className="text-2xl font-semibold">{details?.title}</div>
           <div className="text-base flex justify-start">
             <RiMoneyDollarCircleFill size={20} color='#FFD836' style={{ marginRight: '5px' }} />
             {budget}
           </div>
         </div>
         <div>
-          { eventStore?.guest.map((row, i) => (
+          { details?.guest.map((row, i) => (
             <GuestData data={{...row, churrasId: id}} key={i} />
           ))}
         </div>

@@ -11,23 +11,23 @@ interface GuestDataProps {
 }
 
 export default function GuestData ({ data }: GuestDataProps) {
-  const { setGuest, event } = useStore()
+  const { setGuest, details } = useStore()
 
   const { churrasId, status, name, investment } = data
   const [statusPgto, setStatusPgto] = useState(false)
 
   const getStatus = () => 
-  console.log(event.guest.filter(row => row.name === name))
+  console.log(details.guest.filter(row => row.name === name))
 
   const handleStatus = () => setGuest(name)
-    const guest =  event.guest.filter(row => row.name === name)
-    console.log(guest)
+    const guest =  details.guest.filter(row => row.name === name)
+    // console.log(guest)
   //   setStatusPgto(guest.status)
 
   useEffect(() => {
-    getStatus()
+    // getStatus()
     setStatusPgto(status ?? false)
-  }, [event])
+  }, [details])
   return (
     <div>
       <div className="flex justify-between border-b-2 my-2 p-2 border-[#E5C231]">

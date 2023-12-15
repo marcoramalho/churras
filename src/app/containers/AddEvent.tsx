@@ -1,12 +1,11 @@
 'use client'
 
-import { validationMessages } from "@/mocks/messages";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import Button from "../components/form/Button";
-import { AddNewEvent } from "../services/Events";
-import { useStore } from "../store";
+import Button from "@/app/components/form/Button";
+import { useStore } from "@/app/store";
+import { validationMessages } from "@/mocks/messages";
 
 type EventForm = {
   date: string
@@ -25,7 +24,6 @@ const schema = Yup.object().shape({
 })
 
 export default function AddEvent ({ onClose }: AddEventProps) {
-
   const { setNewEvent } = useStore()
 
   const {

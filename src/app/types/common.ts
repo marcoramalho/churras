@@ -25,3 +25,5 @@ export type Guest = {
 export type Name = {
   name: string
 }
+
+export type LoadingTypes = 'balls' | 'bars' | 'bubbles' | 'cubes' | 'cylon' | 'spin' | 'spinningBubbles' | 'spokes'

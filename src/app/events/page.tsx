@@ -1,17 +1,15 @@
 'use client'
 
-import { churras } from "@/mocks/churras";
+import { useState } from "react";
 import Event from "@/app/components/Event";
+import Dialog from "@/app/components/Dialog";
 import AddEventButton from "@/app/components/AddEventButton";
-import Dialog from "../components/Dialog";
-import { useEffect, useState } from "react";
-import AddEvent from "../containers/AddEvent";
-import { IChurras } from "../types/common";
-import { useStore } from "../store";
+import AddEvent from "@/app/containers/AddEvent";
+import { useStore } from "@/app/store";
+import Loading from "@/app/components/Loading"; 
 
-export default function Dashboard() {
-  const { events } = useStore()
-
+export default function EventList() {
+  const { events, loadingEvents } = useStore()
   const [newEvent, setNewEvent] = useState(false)
   return (
     <>
@@ -19,11 +17,12 @@ export default function Dashboard() {
         <AddEvent onClose={setNewEvent} />
       </Dialog>
       <div className="flex flex-wrap gap-2 mt-[-20px]">
-        { events?.map(churras => (
-          <Event data={churras} key={churras.id} />
-        ))}
+        { events?.length && events?.map(details => (
+          <Event data={details} key={details.id} />
+          ))}
         <AddEventButton onClick={setNewEvent} />
       </div>
+      <Loading open={loadingEvents} type="balls" />
     </>
   )
 }

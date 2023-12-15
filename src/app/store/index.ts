@@ -4,10 +4,9 @@ export const useStore = () => {
   const storeEvents = {
     loadingEvents: churrasStorePersist(state => state.loading),
     events: churrasStorePersist(state => state.events),
-    event: churrasStorePersist(state => state.event),
-    // setStoreEvents: churrasStorePersist(state => state.setEvents),
+    details: churrasStorePersist(state => state.details),
     setNewEvent: churrasStorePersist(state => state.setNewEvent),
-    getEvent: churrasStorePersist(state => state.getEvent),
+    setDetail: churrasStorePersist(state => state.setDetail),
     setGuest: churrasStorePersist(state => state.setGuest),
     setNewGuest: churrasStorePersist(state => state.setNewGuest)
   }

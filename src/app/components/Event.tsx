@@ -13,7 +13,7 @@ interface EventProps {
 }
 
 export default function Event({ data }: EventProps) {
-  const { getEvent } = useStore()
+  const { setDetail } = useStore()
 
   const router = useRouter()
 
@@ -22,7 +22,7 @@ export default function Event({ data }: EventProps) {
 
   const newDate = new Date(date)
   const goToChurrasDatails = () => {
-    getEvent(id)
+    setDetail(data)
     router.push(`/details/${id}`)
   }
   return (

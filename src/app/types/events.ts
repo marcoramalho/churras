@@ -3,10 +3,10 @@ import { AddChurras, IChurras, Guest } from "./common"
 export type EventsSlice = {
   loading: boolean
   events: IChurras[]
-  event: IChurras
+  details: IChurras
   // setEvents: (data: IChurras) => void
   setNewEvent: (data: AddChurras) => void
-  getEvent: (id: number) => void
+  setDetail: (data: IChurras) => void
   setGuest: (name: string) => void
   setNewGuest: (data: Guest) => void
   // getEvent: (id: number) => void
