@@ -29,7 +29,6 @@ export default function Detail({ params }: DetailProps) {
 
   useEffect(() => {
     setBudget(getBudget(details?.guest))
-    console.log(details)
   }, [details])
   return (
     <>

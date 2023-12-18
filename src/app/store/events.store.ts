@@ -37,20 +37,21 @@ export const churrasStorePersist = create(
       set({
         details: data
       })
+      console.log(data.guest)
     },
     setGuest: (name) => {
       set({
         loading: true,
       })
-      const { details, events } = get()
+      const { details, events, setDetail } = get()
       const indexEv = events.length && events.map(event => event.id).indexOf(details.id)
       const indexGs = details.guest && details.guest.map(guest => guest.name).indexOf(name)
       const eventsList = [...events]
 
       eventsList[indexEv].guest[indexGs].status = !eventsList[indexEv].guest[indexGs].status
 
+      setDetail(eventsList[indexEv])
       set({
-        details: eventsList[indexEv],
         events: eventsList,
         loading: false
       })
