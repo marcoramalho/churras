@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { getArrIndex, handleIntegerToDecimal } from "../utils/handleData"
+import { handleIntegerToDecimal } from "../utils/handleData"
 import { Guest } from "../types/common"
 import StatusPgto from "./StatusPgto"
 import { useStore } from "../store"
@@ -12,21 +12,21 @@ interface GuestDataProps {
 }
 
 export default function GuestData ({ data }: GuestDataProps) {
-  const { setGuest, details } = useStore()
-
+  const { setGuest, setRemoveGuest, details } = useStore()
   const { status, name, investment } = data
+
   const [statusPgto, setStatusPgto] = useState(false)
   const [deleteGuest, setDeleteGuest] = useState(false)
 
-  const getIndexOf = getArrIndex(name, details.guest)
-
-  const handleStatus = () =>  setGuest(name) //setStatusPgto(!statusPgto)
-  const handleDelete = (event: number, name: string) => console.log(event, name)
+  const handleStatus = () =>  {
+    setStatusPgto(!statusPgto)
+    setGuest(name)
+  }
+  const handleDelete = (event: number, name: string) => setRemoveGuest(event, name)
 
   useEffect(() => {
-
-    // setStatusPgto(status ?? false)
-  }, [details])
+    setStatusPgto(status ?? false)
+  }, [])
   return (
     <div className="flex justify-between border-b-2 my-2 p-2 border-[#E5C231]" onMouseOver={() => setDeleteGuest(true)} onMouseOut={() => setDeleteGuest(false)}>
       <div className="flex">

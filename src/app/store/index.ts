@@ -8,7 +8,8 @@ export const useStore = () => {
     setNewEvent: churrasStorePersist(state => state.setNewEvent),
     setDetail: churrasStorePersist(state => state.setDetail),
     setGuest: churrasStorePersist(state => state.setGuest),
-    setNewGuest: churrasStorePersist(state => state.setNewGuest)
+    setNewGuest: churrasStorePersist(state => state.setNewGuest),
+    setRemoveGuest: churrasStorePersist(state => state.setRemoveGuest)
   }
 
   return storeEvents

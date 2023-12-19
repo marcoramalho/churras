@@ -1,8 +1,6 @@
 'use client'
 
-import GuestData from "@/app/components/GuestData"
-import { EventDetail } from "@/app/services/Events"
-import { Guest, IChurras } from "@/app/types/common"
+import { Guest } from "@/app/types/common"
 import { getBudget } from "@/app/utils/handleData"
 import moment from "moment"
 import { useEffect, useState } from "react"
@@ -32,7 +30,7 @@ export default function Detail({ params }: DetailProps) {
   useEffect(() => {
     setList(details?.guest)
     setBudget(getBudget(details?.guest))
-  }, [loadingEvents])
+  }, [details])
   return (
     <>
       <Dialog title="Adicionar Convidado" open={newGuest}>

@@ -4,13 +4,10 @@ export type EventsSlice = {
   loading: boolean
   events: IChurras[]
   details: IChurras
-  // setEvents: (data: IChurras) => void
   setNewEvent: (data: AddChurras) => void
   setEvents: (data: IChurras[]) => void
   setDetail: (data: IChurras) => void
   setGuest: (name: string) => void
   setNewGuest: (data: Guest) => void
-  // getEvent: (id: number) => void
-  // setNewGuest: (data: Guest) => void
-  // setStatusGuest: (id: number) => void
+  setRemoveGuest: (id: number, name: string) => void
 }

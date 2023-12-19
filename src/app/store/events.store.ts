@@ -30,9 +30,14 @@ export const churrasStorePersist = create(
       if (!events.find(({ date, title }) => data.date === date && data.title === title)) {
         set({
           events: [...events, newEvent],
-          loading: false,
         })
       }
+
+      setTimeout(() =>
+        set({
+          loading: false,
+        })
+      , 1500)
     },
     setEvents: (data) => {
       set({
@@ -48,6 +53,7 @@ export const churrasStorePersist = create(
       set({
         loading: true,
       })
+
       const { details, events, setDetail, setEvents } = get()
       const eventsIndx = events.length && getArrIndex(details.id, events)
       const guestIndx = details.guest && getArrIndex(name, details.guest)
@@ -58,29 +64,54 @@ export const churrasStorePersist = create(
       setDetail(eventsList[eventsIndx])
       setEvents([...eventsList])
 
-      set({
-        loading: false,
-      })
+      setTimeout(() =>
+        set({
+          loading: false,
+        })
+      , 1500)
     },
     setNewGuest: (data) => {
       set({
         loading: true,
       })
-      const { details, events } = get()
-      const indexEv = events.map(event => event.id).indexOf(details.id)
-      const verName = details.guest.find(row => row.name === data.name)
+
+      const { details, events, setDetail, setEvents } = get()
+      const eventsIndx = getArrIndex(details.id, events)
+      const hasName = details.guest.find(row => row.name === data.name)
+
       const guest = [...details.guest, data]
       const eventUp = {...details, guest}
       const eventsList = [...events, eventUp]
       
-      delete eventsList[indexEv]
+      delete eventsList[eventsIndx]
       
-      if (!!!verName) {
+      if (!!!hasName) {
+        setDetail(eventUp)
+        setEvents(eventsList.flat())
+      }
+
+      setTimeout(() =>
         set({
-          details: eventUp, events: eventsList.flat(),
           loading: false,
         })
-      }
+      , 1500)
+    },
+    setRemoveGuest: (eventId, name) => {
+      set({
+        loading: true,
+      })
+
+      const { events } = get()
+
+      const getItemToRemove = events.filter(({ id }) => id === eventId).pop()?.guest.find(row => row.name === name)
+
+      console.log('remove guest', getItemToRemove)
+
+      setTimeout(() =>
+        set({
+          loading: false,
+        })
+      , 1500)
     }
   }),
   {
