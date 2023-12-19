@@ -4,6 +4,11 @@ import { EventsSlice } from '@/app/types/events';
 import listEvents from '@/mocks/events.json'
 import { IChurras } from '../types/common';
 
+const getIndex = (ref: any, arr: any[]) => 
+  isNaN(ref)
+    ? arr.map(row => row.name).indexOf(ref)
+    : arr.map(row => row.id).indexOf(ref)
+
 export const churrasStorePersist = create(
   persist<EventsSlice>((set, get) => ({
     loading: false,
@@ -33,28 +38,26 @@ export const churrasStorePersist = create(
         })
       }
     },
+    setEvents: (data) => {
+      set({
+        events: [...data]
+      })
+    },
     setDetail: (data) => {
       set({
         details: data
       })
-      console.log(data.guest)
     },
     setGuest: (name) => {
-      set({
-        loading: true,
-      })
-      const { details, events, setDetail } = get()
-      const indexEv = events.length && events.map(event => event.id).indexOf(details.id)
-      const indexGs = details.guest && details.guest.map(guest => guest.name).indexOf(name)
+      const { details, events, setDetail, setEvents } = get()
+      const eventsIndx = events.length && getIndex(details.id, events)
+      const guestIndx = details.guest && getIndex(name, details.guest)
       const eventsList = [...events]
 
-      eventsList[indexEv].guest[indexGs].status = !eventsList[indexEv].guest[indexGs].status
+      eventsList[eventsIndx].guest[guestIndx].status = !eventsList[eventsIndx].guest[guestIndx].status
 
-      setDetail(eventsList[indexEv])
-      set({
-        events: eventsList,
-        loading: false
-      })
+      setDetail(eventsList[eventsIndx])
+      setEvents([...eventsList])
     },
     setNewGuest: (data) => {
       set({

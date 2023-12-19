@@ -14,18 +14,16 @@ interface GuestDataProps {
 export default function GuestData ({ data }: GuestDataProps) {
   const { setGuest, details } = useStore()
 
-  const { churrasId, status, name, investment } = data
+  const { status, name, investment } = data
   const [statusPgto, setStatusPgto] = useState(false)
   const [deleteGuest, setDeleteGuest] = useState(false)
 
-  const handleStatus = () => setGuest(name) //console.log('GuestData', name)
-  const guest =  details.guest.filter(row => row.name === name)
-  
+  const handleStatus = () =>  setStatusPgto(!statusPgto) // setGuest(name)
   const handleDelete = (event: number, name: string) => console.log(event, name)
 
   useEffect(() => {
     setStatusPgto(status ?? false)
-  }, [details])
+  }, [])
   return (
     <div>
       <div className="flex justify-between border-b-2 my-2 p-2 border-[#E5C231]" onMouseOver={() => setDeleteGuest(true)} onMouseOut={() => setDeleteGuest(false)}>

@@ -1,7 +1,6 @@
 'use client'
 
 import { ReactNode } from 'react'
-// import type { Metadata } from 'next' // vai dar erro por causa do use client
 import { Raleway } from 'next/font/google'
 import './globals.css'
 import { Toaster, toast } from 'sonner'
@@ -11,10 +10,6 @@ interface SignInLayout {
 }
 
 const raleway = Raleway({ weight: "300", subsets: ["latin"] })
-
-// export const metadata: Metadata = {  // vai dar erro por causa do use client
-//   title: 'Churras Trinca',
-// }
 
 export default function RootLayout({ children }: SignInLayout) {
   return (

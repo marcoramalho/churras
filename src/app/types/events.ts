@@ -6,6 +6,7 @@ export type EventsSlice = {
   details: IChurras
   // setEvents: (data: IChurras) => void
   setNewEvent: (data: AddChurras) => void
+  setEvents: (data: IChurras[]) => void
   setDetail: (data: IChurras) => void
   setGuest: (name: string) => void
   setNewGuest: (data: Guest) => void
