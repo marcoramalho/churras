@@ -2,7 +2,7 @@
 
 import GuestData from "@/app/components/GuestData"
 import { EventDetail } from "@/app/services/Events"
-import { IChurras } from "@/app/types/common"
+import { Guest, IChurras } from "@/app/types/common"
 import { getBudget } from "@/app/utils/handleData"
 import moment from "moment"
 import { useEffect, useState } from "react"
@@ -13,6 +13,7 @@ import Dialog from "@/app/components/Dialog"
 import AddGuest from "@/app/containers/AddGuest"
 import Link from "next/link"
 import { useStore } from "@/app/store"
+import GuestList from "@/app/containers/GuestList"
 
 interface DetailProps {
   params: {
@@ -21,15 +22,17 @@ interface DetailProps {
 }
 
 export default function Detail({ params }: DetailProps) {
-  const { details } = useStore()
+  const { details, loadingEvents } = useStore()
 
   const { id } = params
   const [newGuest, setNewGuest] = useState(false)
   const [budget, setBudget] = useState('0,00')
+  const [list, setList] = useState<Guest[]>([])
 
   useEffect(() => {
+    setList(details?.guest)
     setBudget(getBudget(details?.guest))
-  }, [details])
+  }, [loadingEvents])
   return (
     <>
       <Dialog title="Adicionar Convidado" open={newGuest}>
@@ -52,9 +55,7 @@ export default function Detail({ params }: DetailProps) {
           </div>
         </div>
         <div>
-          { details?.guest.map((row, i) => (
-            <GuestData data={{...row, churrasId: id}} key={i} />
-          ))}
+          <GuestList eventId={id} data={list} />
         </div>
         <div className="flex justify-end my-4"><Link href="/events">Voltar</Link></div>
       </div>

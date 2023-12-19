@@ -3,11 +3,7 @@ import { persist } from 'zustand/middleware';
 import { EventsSlice } from '@/app/types/events';
 import listEvents from '@/mocks/events.json'
 import { IChurras } from '../types/common';
-
-const getIndex = (ref: any, arr: any[]) => 
-  isNaN(ref)
-    ? arr.map(row => row.name).indexOf(ref)
-    : arr.map(row => row.id).indexOf(ref)
+import { getArrIndex } from '../utils/handleData';
 
 export const churrasStorePersist = create(
   persist<EventsSlice>((set, get) => ({
@@ -49,15 +45,22 @@ export const churrasStorePersist = create(
       })
     },
     setGuest: (name) => {
+      set({
+        loading: true,
+      })
       const { details, events, setDetail, setEvents } = get()
-      const eventsIndx = events.length && getIndex(details.id, events)
-      const guestIndx = details.guest && getIndex(name, details.guest)
+      const eventsIndx = events.length && getArrIndex(details.id, events)
+      const guestIndx = details.guest && getArrIndex(name, details.guest)
       const eventsList = [...events]
 
       eventsList[eventsIndx].guest[guestIndx].status = !eventsList[eventsIndx].guest[guestIndx].status
 
       setDetail(eventsList[eventsIndx])
       setEvents([...eventsList])
+
+      set({
+        loading: false,
+      })
     },
     setNewGuest: (data) => {
       set({

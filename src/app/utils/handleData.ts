@@ -10,3 +10,8 @@ export const getBudget = (data: Guest[]) => {
   data?.map(({ investment }) => budget += Number(investment))
   return `R$ ${handleIntegerToDecimal(budget)}`
 }
+
+export const getArrIndex = (ref: any, arr: any[]) => 
+  typeof ref === 'string'
+    ? arr.map(row => row.name).indexOf(ref)
+    : arr.map(row => row.id).indexOf(ref)
