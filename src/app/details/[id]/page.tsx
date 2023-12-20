@@ -12,6 +12,7 @@ import AddGuest from "@/app/containers/AddGuest"
 import Link from "next/link"
 import { useStore } from "@/app/store"
 import GuestList from "@/app/containers/GuestList"
+import { Tooltip } from "react-tooltip"
 
 interface DetailProps {
   params: {
@@ -40,7 +41,13 @@ export default function Detail({ params }: DetailProps) {
         <div className="flex justify-between">
           <div className="text-xl font-bold">{moment(details?.date).format('DD/MM')}</div>
           <div className="text-base flex justify-start">
-            <span className="mr-2"><button onClick={() => setNewGuest(true)}><FaCirclePlus size={24} color='#FED21D' /></button></span>
+            <span className="mr-2">
+              <button id="add-guest" onClick={() => setNewGuest(true)}><FaCirclePlus size={24} color='#FED21D' /></button>
+              <Tooltip
+                anchorSelect="#add-guest"
+                content="Adicionar convidado"
+              />
+            </span>
             <HiOutlineUsers size={18} color='#FFD836' style={{ marginRight: '5px' }} />
             {details?.guest.length}
           </div>

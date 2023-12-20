@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware';
 import { EventsSlice } from '@/app/types/events';
 import listEvents from '@/mocks/events.json'
-import { IChurras } from '../types/common';
+import { Guest, IChurras } from '../types/common';
 import { getArrIndex } from '../utils/handleData';
 
 export const churrasStorePersist = create(
@@ -101,11 +101,17 @@ export const churrasStorePersist = create(
         loading: true,
       })
 
-      const { events } = get()
+      const { events, setDetail, setEvents } = get()
 
-      const getItemToRemove = events.filter(({ id }) => id === eventId).pop()?.guest.find(row => row.name === name)
+      const eventsListCopy = [...events]
+      const getIndexEventToRemove = getArrIndex(eventId, eventsListCopy)
+      const guestListCopy = events.filter(({ id }) => id === eventId).pop()?.guest ?? []
+      const getIndexGuestToRemove = guestListCopy && getArrIndex(name, guestListCopy)
 
-      console.log('remove guest', getItemToRemove)
+      delete eventsListCopy[getIndexEventToRemove].guest[Number(getIndexGuestToRemove)]
+
+      setDetail(eventsListCopy[getIndexEventToRemove])
+      setEvents(eventsListCopy)
 
       setTimeout(() =>
         set({

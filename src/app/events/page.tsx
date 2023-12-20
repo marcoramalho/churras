@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from "react";
+import { useStore } from "@/app/store";
+import AddEvent from "@/app/containers/AddEvent";
+import AddEventButton from "@/app/components/AddEventButton";
 import Event from "@/app/components/Event";
 import Dialog from "@/app/components/Dialog";
-import AddEventButton from "@/app/components/AddEventButton";
-import AddEvent from "@/app/containers/AddEvent";
-import { useStore } from "@/app/store";
 import Loading from "@/app/components/Loading"; 
 
 export default function EventList() {

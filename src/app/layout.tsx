@@ -1,17 +1,25 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { Raleway } from 'next/font/google'
-import './globals.css'
+import { usePathname, useRouter } from 'next/navigation'
 import { Toaster, toast } from 'sonner'
+import 'react-tooltip/dist/react-tooltip.css'
+import './globals.css'
 
 interface SignInLayout {
   children: ReactNode
 }
 
-// const raleway = Raleway({ weight: "300", subsets: ["latin"] })
-
 export default function RootLayout({ children }: SignInLayout) {
+  const pathname = usePathname()
+  const router = useRouter()
+  
+  if (pathname !== '/') {
+    if (!localStorage.getItem('signIn')) {
+      localStorage.clear()
+      return router.push('/')
+    }
+  }
   return (
     <html lang="pt-br" suppressHydrationWarning={true}>
       <body className='bg-yellow-300 bkg-header'>
